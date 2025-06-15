@@ -1,0 +1,811 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lazara - Stable & Bale Experience</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:400,700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+@font-face {
+    font-family: 'Fenice';
+    src: url('fonts/Fenice.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+        body {
+            font-family: 'Poppins', serif;
+            background: #000;
+            color: white;
+            letter-spacing: 1px;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Fenice', serif;
+            letter-spacing: 10px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            text-align: center;
+            padding: 60px 0;
+            background: linear-gradient(45deg, rgba(255,215,0,0.1), rgba(57, 57, 57, 0.509));
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            margin: 20px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .logo {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 30px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 10px 30px rgba(255,215,0,0.3);
+            animation: pulse 2s infinite;
+            overflow: hidden;
+        }
+
+        .logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 30px;
+        }
+
+        /* Grid Layout */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 20px;
+        }
+
+        .pic-card {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            position: relative;
+            overflow: hidden;
+            cursor: pointer;
+        }
+
+        .pic-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,215,0,0.2), transparent);
+            transition: left 0.6s ease;
+        }
+
+        .pic-card:hover::before {
+            left: 100%;
+        }
+
+        .pic-card:hover {
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0,0,0,0.4);
+            border-color: #ffd700;
+        }
+
+        .pic-card-full h3,
+        .pic-card-medium h3,
+        .pic-card-small h3 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: white;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            object-fit: cover;
+        }
+
+        .pic-card-full .image-placeholder {
+            height: 400px;
+            object-fit: cover;
+        }
+
+        .pic-card-medium .image-placeholder {
+            height: 300px;
+            object-fit: cover;
+        }
+
+        .pic-card-small .image-placeholder {
+            height: 200px;
+            object-fit: cover;
+        }
+
+        /* Large Cards */
+        .large-card {
+            grid-column: span 2;
+        }
+
+        .large-card .image-placeholder {
+            height: 250px;
+        }
+
+        /* Special Sections */
+        .activities-section {
+            background: linear-gradient(135deg, rgba(255,215,0,0.1), rgba(138,43,226,0.1));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,215,0,0.3);
+        }
+
+        .activities-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            color: #ffd700;
+        }
+
+        .activities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .activity-item {
+            background: rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .activity-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255,215,0,0.1);
+            border-color: #ffd700;
+        }
+
+        .why-lazara {
+            background: linear-gradient(135deg, rgba(139,69,19,0.3), rgba(160,82,45,0.2));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 20px;
+            text-align: center;
+        }
+
+        .virtual-tour {
+            background: linear-gradient(135deg, rgba(0,128,0,0.2), rgba(34,139,34,0.1));
+            border-radius: 20px;
+            padding: 40px;
+            margin: 40px 20px;
+            text-align: center;
+        }
+
+        .btn {
+            background: linear-gradient(45deg, #ffd700, #ffb347);
+            color: #1a0033;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+            text-decoration: none;
+            display: inline-block;
+            margin: 10px;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(255,215,0,0.5);
+            background: linear-gradient(45deg, #ffb347, #ffd700);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+        }
+
+        /* Responsive Layout Styles */
+        .pic-01-section {
+            margin: 20px;
+            text-align: center;
+        }
+
+        .pic-card-full {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+            margin-bottom: 20px;
+        }
+
+        .pic-card-full h3 {
+            font-size: 2.5rem;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .pic-01-text h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .pic-01-text p {
+            line-height: 1.6;
+            opacity: 0.9;
+            font-size: 1rem;
+        }
+
+        .pic-02-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 40px 20px;
+            align-items: center;
+        }
+
+        .pic-card-medium {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 20px;
+            padding: 30px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .pic-card-medium:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .stable-experience h2 {
+            color: #ffd700;
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .stable-experience p {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        .intro-text {
+            text-align: center;
+            margin: 20px;
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .pics-row-three {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 40px 20px;
+        }
+
+        .pic-card-small {
+            background: linear-gradient(135deg, rgba(255,255,255,0.1), rgba(255,255,255,0.05));
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            transition: all 0.4s ease;
+        }
+
+        .pic-card-small:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+        }
+
+        .price-info {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .pics-row-two {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 30px;
+            margin: 40px 20px;
+        }
+
+        .service-info {
+            margin-top: 15px;
+            text-align: left;
+            font-size: 0.95rem;
+        }
+
+        .facilities-text {
+            text-align: center;
+            margin: 30px 20px;
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .pic-08-section {
+            margin: 40px 20px;
+            text-align: center;
+        }
+
+        .location-info {
+            margin-top: 20px;
+            text-align: left;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .location-info p {
+            margin: 10px 0;
+            font-size: 1rem;
+        }
+
+        .pic-09-section {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 40px 20px;
+            align-items: center;
+        }
+
+        .bale-lazara-text h2 {
+            color: #ffd700;
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .bale-lazara-text p {
+            margin: 15px 0;
+            line-height: 1.6;
+            opacity: 0.9;
+        }
+
+        /* Responsive breakpoints */
+        @media (max-width: 1024px) {
+            .pic-02-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .pics-row-three {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .pic-09-section {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .pics-row-three {
+                grid-template-columns: 1fr;
+            }
+            
+            .pics-row-two {
+                grid-template-columns: 1fr;
+            }
+            
+            .pic-01-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .stable-experience h2 {
+                font-size: 1.5rem;
+            }
+            
+            .bale-lazara-text h2 {
+                font-size: 1.5rem;
+            }
+            
+            .pic-card-full h3,
+            .pic-card-medium h3,
+            .pic-card-small h3 {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 0 10px;
+            }
+            
+            .pic-01-section,
+            .pic-02-section,
+            .pics-row-three,
+            .pics-row-two,
+            .pic-08-section,
+            .pic-09-section {
+                margin: 20px 10px;
+            }
+            
+            .pic-card-full,
+            .pic-card-medium,
+            .pic-card-small {
+                padding: 20px;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Interactive Elements */
+        .floating-particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #ffd700;
+            border-radius: 50%;
+            animation: float 6s infinite ease-in-out;
+            opacity: 0.6;
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px) rotate(0deg);
+                opacity: 0;
+            }
+            50% {
+                transform: translateY(-100px) rotate(180deg);
+                opacity: 1;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-particles" id="particles"></div>
+
+    <div class="container">
+        <header class="header">
+            <div class="logo">
+                <img src="1.png" alt="Lazara Logo">
+            </div>
+            <h1>LAZARA</h1>
+            <p class="subtitle">Stable & Bale Lazara (Resto)</p>
+        </header>
+
+        <!-- THE PIC 01 - Full width hero -->
+        
+
+        <!-- THE PIC 02 - Stable Experience -->
+        <div class="pic-02-section">
+            <div class="pic-card-medium">
+                <h3></h3>
+                <img src="2.jpg" alt="Stable Experience" class="image-placeholder">
+            </div>
+            <div class="stable-experience">
+                <h2>Stable Experience</h2>
+                <p>Ride with Style, Feel the Vibes</p>
+            </div>
+        </div>
+
+        <!-- Introduction text -->
+        <div class="intro-text">
+            <p>Didirikan pada 14 Februari 2021, Lazara Stable adalah stable berkuda inklusif di Kota Palembang. Kami menawarkan:</p>
+        </div>
+
+        <!-- THE PIC 03, 04, 05 - Three cards row -->
+        <div class="pics-row-three">
+            <div class="pic-card-small">
+                <h3></h3>
+                <img src="3.jpg" alt="Pony Ride" class="image-placeholder">
+                <div class="price-info">
+                    <p><strong>Pony Ride (Rp 35.000)</strong> <br>
+                        Untuk anak-anak (BB ≤ 30 kg)</p>
+                </div>
+            </div>
+            <div class="pic-card-small">
+                <h3></h3>
+                <img src="4.jpg" alt="Horse Ride" class="image-placeholder">
+                <div class="price-info">
+                    <p><strong>Horse Ride Dewasa (Rp 75.000)</strong> <br>
+                        Satu putaran paddock</p>
+                </div>
+            </div>
+            <div class="pic-card-small">
+                <h3></h3>
+                <img src="5.jpg" alt="Joy Ride" class="image-placeholder">
+                <div class="price-info">
+                    <p><strong>Joy Ride (Rp 300.000)</strong> <br>
+                        Pengalaman berkuda 45 menit</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- THE PIC 06, 07 - Two cards row -->
+        <div class="pics-row-two">
+            <div class="pic-card-medium">
+                <h3></h3>
+                <img src="6.jpg" alt="Horse Riding School" class="image-placeholder">
+                <div class="service-info">
+                    <p><strong>Horse Riding School</strong></p>
+                    <p>• Pelajar : Rp 1.400.000</p>
+                    <p>• Umum : Rp 1.800.000</p>
+                </div>
+            </div>
+            <div class="pic-card-medium">
+                <h3></h3>
+                <img src="7.jpg" alt="Photoshoot & Prewedding" class="image-placeholder">
+                <div class="service-info">
+                    <p><strong>Photoshoot & Prewedding<br>
+                         (Rp 500.000)</strong></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Facilities text -->
+        <div class="facilities-text">
+            <p>Fasilitas kami terbuka untuk edukasi, field trip, maupun aktivitas refreshing. Semua kegiatan dikelola dengan standar keamanan dan kesejahteraan kuda yang tinggi.</p>
+        </div>
+
+        <!-- THE PIC 08 - Full width -->
+        <div class="pic-08-section">
+            <div class="pic-card-full">
+                <h3></h3>
+                <img src="8.jpg" alt="Facilities Overview" class="image-placeholder">
+            </div>
+            <div class="location-info">
+                <p>• Lokasi : Jl. Sukarela, Sukarami, Palembang</p>
+                <p>• Jam buka : Selasa—Minggu, 08.00—18.00 (Senin tutup)</p>
+            </div>
+        </div>
+
+        <!-- THE PIC 09 and Bale Lazara section -->
+        <div class="pic-09-section">
+            <div class="bale-lazara-text">
+                <h2>Bale Lazara (Resto)</h2>
+                <p><em>Savor Tradition, Relish the Taste of Togetherness</em></p>
+                <p>Bale Lazara menyajikan kuliner khas Jawa dalam bangunan Joglo autentik yang nyaman dan estetik. Dengan bahan segar berkualitas dan resep tradisional, setiap sajian kami penuh dengan cita rasa dan kehangatan keluarga.</p>
+            </div>
+            <div class="pic-card-medium">
+                <h3></h3>
+                <img src="9.JPG" alt="Bale Lazara Restaurant" class="image-placeholder">
+            </div>
+        </div>
+
+        <section class="activities-section">
+            <h2>Activities & Events</h2>
+            <p>Experience the best of Lazara with our diverse range of activities and special events.</p>
+            
+            <div class="activities-grid">
+                <div class="activity-item">
+                    <h3>🏇 Equestrian Events</h3>
+                    <p>Professional horse riding lessons and competitions for all skill levels.</p>
+                </div>
+                <div class="activity-item">
+                    <h3>🍽️ Fine Dining</h3>
+                    <p>Gourmet restaurant experience with local and international cuisine.</p>
+                </div>
+                <div class="activity-item">
+                    <h3>🌟 Special Events</h3>
+                    <p>Wedding venues, corporate events, and private celebrations.</p>
+                </div>
+                <div class="activity-item">
+                    <h3>🎯 Training Programs</h3>
+                    <p>Professional horse training and riding instruction programs.</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="why-lazara">
+            <h2>Why Lazara?</h2>
+            <p>Choose Lazara for an unparalleled experience combining luxury, tradition, and excellence. Our commitment to quality and service makes us the premier destination for equestrian enthusiasts and fine dining connoisseurs.</p>
+            <ul style="text-align: left; max-width: 600px; margin: 20px auto;">
+                <li>🏆 Award-winning facilities and services</li>
+                <li>🌟 Expert staff and professional training</li>
+                <li>🍴 Exceptional culinary experiences</li>
+                <li>🏇 World-class equestrian programs</li>
+                <li>🌄 Beautiful scenic location</li>
+            </ul>
+        </section>
+
+        <section class="virtual-tour">
+            <h2>Virtual Tour</h2>
+            <p>Take a virtual journey through our facilities and discover what makes Lazara special. Explore our stables, restaurant, and beautiful grounds from the comfort of your home.</p>
+            <button class="btn" id="virtualTourBtn">Start Virtual Tour</button>
+            <button class="btn" id="contactUsBtn">Contact Us</button>
+        </section>
+    </div>
+    <script>
+        document.getElementById('virtualTourBtn').addEventListener('click', function(e) {
+            window.open('https://skybyru.github.io/Virtual_Tour_Lazara/', '_blank');
+        });
+    </script>
+    <script>
+        // Create floating particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 20;
+
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 6 + 's';
+                particle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Add click effects to cards
+        document.querySelectorAll('.pic-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.transform = 'scale(0.95)';
+                setTimeout(() => {
+                    this.style.transform = '';
+                }, 150);
+            });
+        });
+
+        // Add hover effects to image placeholders
+        document.querySelectorAll('.image-placeholder').forEach(placeholder => {
+            placeholder.addEventListener('click', function() {
+                alert('Image upload functionality would be implemented here. You can replace this placeholder with your actual images.');
+            });
+        });
+
+        // Smooth scroll animations
+        window.addEventListener('scroll', () => {
+            const cards = document.querySelectorAll('.pic-card');
+            cards.forEach(card => {
+                const rect = card.getBoundingClientRect();
+                const isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+                
+                if (isVisible) {
+                    card.style.animation = 'fadeInUp 0.6s ease-out';
+                }
+            });
+        });
+
+        // Initialize particles
+        createParticles();
+
+        // Add button interactions
+        document.querySelectorAll('.btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.style.position = 'absolute';
+                ripple.style.borderRadius = '50%';
+                ripple.style.background = 'rgba(255,255,255,0.5)';
+                ripple.style.animation = 'ripple 0.6s ease-out';
+                ripple.style.pointerEvents = 'none';
+                
+                this.style.position = 'relative';
+                this.style.overflow = 'hidden';
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+                
+                // Button specific actions
+                if (this.textContent.includes('Virtual Tour')) {
+                    alert('Virtual tour would launch here!');
+                } else if (this.textContent.includes('Book')) {
+                    alert('Booking system would open here!');
+                } else {
+                    alert('More information would be displayed here!');
+                }
+            });
+        });
+
+        // Add ripple animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes ripple {
+                0% {
+                    transform: scale(0);
+                    opacity: 1;
+                }
+                100% {
+                    transform: scale(1);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+        document.getElementById('contactUsBtn').addEventListener('click', function(e) {
+    e.preventDefault();
+    document.getElementById('waModal').style.display = 'flex';
+});
+    </script>
+    <div id="waModal" style="display:none; position:fixed; top:0; left:0; width:100vw; height:100vh; background:rgba(0,0,0,0.5); z-index:9999; align-items:center; justify-content:center;">
+        <div style="background:rgb(181, 0, 0); color:rgb(255, 255, 255); padding:30px 20px; border-radius:15px; min-width:250px; text-align:center; position:relative;">
+          <h3>Pilih Nomor WhatsApp</h3>
+          <button class="btn" style="margin:10px 0;" onclick="window.open('https://wa.me/6285378792929','_blank')">Lazara Stable : 0853-7879-2929</button><br>
+          <button class="btn" style="margin:10px 0;" onclick="window.open('https://wa.me/628117832299','_blank')">Bale Lazara : 0811-7832-2299</button><br>
+          <button class="btn" style="background:#ccc; color:#333;" onclick="document.getElementById('waModal').style.display='none'">Tutup</button>
+        </div>
+      </div>
+</body>
+</html>/
